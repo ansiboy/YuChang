@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65EE21B6-6AC2-4010-961D-E55AD001FAE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WeiXin</RootNamespace>
+    <AssemblyName>WeiXin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Error.cs" />
+    <Compile Include="MessageProcesser.cs" />
+    <Compile Include="Models\EventMessage.cs" />
+    <Compile Include="Models\EventType.cs" />
+    <Compile Include="Models\ImageMessage.cs" />
+    <Compile Include="Models\ImageReply.cs" />
+    <Compile Include="Models\LinkMessage.cs" />
+    <Compile Include="Models\LocationMessage.cs" />
+    <Compile Include="Models\PostMessage.cs" />
+    <Compile Include="Models\ReplyMessage.cs" />
+    <Compile Include="Models\MessageType.cs" />
+    <Compile Include="Models\MusicReply.cs" />
+    <Compile Include="Models\TextMessage.cs" />
+    <Compile Include="PromoteService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\TextReply.cs" />
+    <Compile Include="Models\VideoMessage.cs" />
+    <Compile Include="Models\VideoReply.cs" />
+    <Compile Include="Models\VoiceMessage.cs" />
+    <Compile Include="Models\VoiceReply.cs" />
+    <Compile Include="HttpHandler.cs" />
+    <Compile Include="ShoppingManager.cs" />
+    <Compile Include="tenpayLib\MD5Util.cs" />
+    <Compile Include="tenpayLib\RequestHandler.cs" />
+    <Compile Include="tenpayLib\ResponseHandler.cs" />
+    <Compile Include="tenpayLib\SHA1Util.cs" />
+    <Compile Include="tenpayLib\TenpayUtil.cs" />
+    <Compile Include="UserManager.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinTest", "Test\WeiXinTest.csproj", "{CC2CD79A-0BE1-4E0C-A400-518E041DA940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXin", "WeiXin\WeiXin.csproj", "{65EE21B6-6AC2-4010-961D-E55AD001FAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{8ED8483E-E51B-4427-B3FF-45965A009BBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC2CD79A-0BE1-4E0C-A400-518E041DA940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2CD79A-0BE1-4E0C-A400-518E041DA940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2CD79A-0BE1-4E0C-A400-518E041DA940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2CD79A-0BE1-4E0C-A400-518E041DA940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65EE21B6-6AC2-4010-961D-E55AD001FAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65EE21B6-6AC2-4010-961D-E55AD001FAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65EE21B6-6AC2-4010-961D-E55AD001FAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65EE21B6-6AC2-4010-961D-E55AD001FAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED8483E-E51B-4427-B3FF-45965A009BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED8483E-E51B-4427-B3FF-45965A009BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED8483E-E51B-4427-B3FF-45965A009BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED8483E-E51B-4427-B3FF-45965A009BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

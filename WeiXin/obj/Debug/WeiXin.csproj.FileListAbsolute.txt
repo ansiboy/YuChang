@@ -1,0 +1,4 @@
+D:\MyProjects\WeiXin\WeiXin\bin\Debug\YuChang.Core.dll
+D:\MyProjects\WeiXin\WeiXin\bin\Debug\YuChang.Core.pdb
+D:\MyProjects\WeiXin\WeiXin\obj\Debug\YuChang.Core.dll
+D:\MyProjects\WeiXin\WeiXin\obj\Debug\YuChang.Core.pdb
