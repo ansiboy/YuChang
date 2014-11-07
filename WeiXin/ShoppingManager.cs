@@ -59,13 +59,12 @@ namespace YuChang.Core
             values.Add("app_signature", paySign);
             values.Add("sign_method", "sha1");
 
-            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
-            var str = serial.Serialize(values);
+            var str = Utility.Serialize(values);
 
             var client = new WebClient();
             client.Encoding = Utility.DefaultEncoding;
             var result = client.UploadString(url, "post", str);
-            var dic = serial.Deserialize<Dictionary<string, object>>(result);
+            var dic = Utility.Deserialize<Dictionary<string, object>>(result);
             var code = (int)dic["errcode"];
             var msg = (string)dic["errmsg"];
             if (code != 0)
@@ -79,7 +78,7 @@ namespace YuChang.Core
             var sign = MD5Encoding(str).ToUpper();
             var package = string.Format("out_trade_no={0}&partner={1}&sign={2}", outTradeNO, partnerId, sign);
             var timeStamp = DateTimeToUnixTimestamp(DateTime.Now).ToString();
-  
+
             var paySignReqHandler = new RequestHandler(Utility.DefaultEncoding);
             paySignReqHandler.setParameter("appid", this.accessToken.AppId);
             paySignReqHandler.setParameter("appkey", this.appKey);
@@ -95,18 +94,13 @@ namespace YuChang.Core
             values.Add("sign_method", "sha1");
 
             var url = "https://api.weixin.qq.com/pay/orderquery?access_token=" + accessToken;
-            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
 
-            //=============================================================
-            // 由于 Serialize 会将 & 转换为转义符 \\u0026，需要重新替换为 &
-            str = serial.Serialize(values);    
-            str = str.Replace("\\u0026", "&");
-            //=============================================================
-
+            str = Utility.Serialize(values);
             var client = new WebClient();
             client.Encoding = Utility.DefaultEncoding;
             var result = client.UploadString(url, "post", str);
-            var dic = serial.Deserialize<Dictionary<string, object>>(result);
+            var dic = Utility.Deserialize<Dictionary<string, object>>(result);
             var code = (int)dic["errcode"];
             var msg = (string)dic["errmsg"];
             if (code != 0)
@@ -114,6 +108,36 @@ namespace YuChang.Core
 
             return dic;
         }
+
+        public Dictionary<string, object> MCHDonw(string partnerId, string partnerKey, DateTime transTime)
+        {
+            var trans_time = transTime.ToString("yyyy-MM-dd");
+            var stamp = DateTimeToUnixTimestamp(DateTime.Now).ToString();
+            var sign = MD5Encoding(string.Format("spid={0}&trans_time={1}&stamp={2}&key={3}", partnerId, trans_time, stamp, partnerKey));
+
+            var dic = new NameValueCollection();
+            dic.Add("spid", partnerId);
+            dic.Add("trans_time", trans_time);
+            dic.Add("stamp", stamp);
+            dic.Add("sign", sign);
+
+            var url = "http://mch.tenpay.com/cgi-bin/mchdown_real_new.cgi";
+            var client = new WebClient();
+            client.Encoding = Encoding.GetEncoding("gbk"); //Utility.DefaultEncoding;
+            var bytes = client.UploadValues(url, "post", dic);
+            var xml = client.Encoding.GetString(bytes);
+            //<?xml version="1.0" encoding="gb2312" ?> 
+            //<root> 
+            //  <retcode>0</retcode> 
+            //  <retmsg></retmsg> 
+            //  <partner>1900000109</partner> 
+            //<status>0</status> 
+            //<sign>8DB4A013A8B515349C307F1E448CE836</sign> 
+            //</root> 
+
+            return null;
+        }
+
 
         public static int DateTimeToUnixTimestamp(DateTime dateTime)
         {

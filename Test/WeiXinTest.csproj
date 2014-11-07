@@ -92,7 +92,7 @@
       <Name>Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\WeiXin\WeiXin.csproj">
-      <Project>{65EE21B6-6AC2-4010-961D-E55AD001FAE8}</Project>
+      <Project>{65ee21b6-6ac2-4010-961d-e55ad001fae8}</Project>
       <Name>WeiXin</Name>
     </ProjectReference>
   </ItemGroup>

@@ -46,15 +46,15 @@ namespace YuChang.Core
                 url = Constants.RequestRoot + url;
 
 
-//            Connection: keep-alive
-//Date: Thu, 23 Oct 2014 20:35:35 GMT
-//Server: nginx/1.4.4
-//Content-Type: application/json; encoding=utf-8
-//Content-Length: 27
-//{
-//    "errcode": 0, 
-//    "errmsg": "ok"
-//}
+            //            Connection: keep-alive
+            //Date: Thu, 23 Oct 2014 20:35:35 GMT
+            //Server: nginx/1.4.4
+            //Content-Type: application/json; encoding=utf-8
+            //Content-Length: 27
+            //{
+            //    "errcode": 0, 
+            //    "errmsg": "ok"
+            //}
             WebRequest request = WebRequest.Create(url);
             // Set the Method property of the request to POST.
             request.Method = "POST";
@@ -100,9 +100,7 @@ namespace YuChang.Core
             var client = new WebClient();
             client.Encoding = DefaultEncoding;
             var str = client.UploadString(url, "post", postString);
-            //var str = System.Text.Encoding.UTF8.GetString(bytes);
-            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
-            var data = serial.Deserialize<Dictionary<string, object>>(str);
+            var data =Deserialize<Dictionary<string, object>>(str);
 
             return data;
         }
@@ -117,8 +115,7 @@ namespace YuChang.Core
             var bytes = client.UploadValues(url, "post", values);
 
             var str = System.Text.Encoding.UTF8.GetString(bytes);
-            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
-            var data = serial.Deserialize<Dictionary<string, object>>(str);
+            var data = Deserialize<Dictionary<string, object>>(str);
 
             return data;
         }
@@ -283,5 +280,22 @@ namespace YuChang.Core
             return valuePairs[value];
         }
 
+
+        internal static string Serialize(Dictionary<string, string> values)
+        {
+            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
+            var str = serial.Serialize(values);
+            //=============================================================
+            // 由于 Serialize 会将 & 转换为转义符 \\u0026，需要重新替换为 &
+            str = str.Replace("\\u0026", "&");
+            //=============================================================
+            return str;
+        }
+
+        internal static T Deserialize<T>(string str)
+        {
+            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return serial.Deserialize<T>(str);
+        }
     }
 }
