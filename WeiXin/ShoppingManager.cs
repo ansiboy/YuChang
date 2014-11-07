@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using tenpayApp;
 
@@ -72,9 +73,66 @@ namespace YuChang.Core
 
         }
 
+        public Dictionary<string, object> QueryOrder(string partnerId, string partnerKey, string outTradeNO)
+        {
+            var str = string.Format("out_trade_no={0}&partner={1}&key={2}", outTradeNO, partnerId, partnerKey);
+            var sign = MD5Encoding(str).ToUpper();
+            var package = string.Format("out_trade_no={0}&partner={1}&sign={2}", outTradeNO, partnerId, sign);
+            var timeStamp = DateTimeToUnixTimestamp(DateTime.Now).ToString();
+  
+            var paySignReqHandler = new RequestHandler(Utility.DefaultEncoding);
+            paySignReqHandler.setParameter("appid", this.accessToken.AppId);
+            paySignReqHandler.setParameter("appkey", this.appKey);
+            paySignReqHandler.setParameter("package", package);
+            paySignReqHandler.setParameter("timestamp", timeStamp);
+            var app_signature = paySignReqHandler.createSHA1Sign();
+
+            var values = new Dictionary<string, string>();
+            values.Add("appid", this.accessToken.AppId);
+            values.Add("package", package);
+            values.Add("timestamp", timeStamp);
+            values.Add("app_signature", app_signature);
+            values.Add("sign_method", "sha1");
+
+            var url = "https://api.weixin.qq.com/pay/orderquery?access_token=" + accessToken;
+            var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            //=============================================================
+            // 由于 Serialize 会将 & 转换为转义符 \\u0026，需要重新替换为 &
+            str = serial.Serialize(values);    
+            str = str.Replace("\\u0026", "&");
+            //=============================================================
+
+            var client = new WebClient();
+            client.Encoding = Utility.DefaultEncoding;
+            var result = client.UploadString(url, "post", str);
+            var dic = serial.Deserialize<Dictionary<string, object>>(result);
+            var code = (int)dic["errcode"];
+            var msg = (string)dic["errmsg"];
+            if (code != 0)
+                throw Error.WeiXinError(code, msg);
+
+            return dic;
+        }
+
         public static int DateTimeToUnixTimestamp(DateTime dateTime)
         {
             return Convert.ToInt32((dateTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds);
+        }
+
+        static string MD5Encoding(string rawPass)
+        {
+            // 创建MD5类的默认实例：MD5CryptoServiceProvider
+            MD5 md5 = MD5.Create();
+            byte[] bs = Encoding.UTF8.GetBytes(rawPass);
+            byte[] hs = md5.ComputeHash(bs);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in hs)
+            {
+                // 以十六进制格式格式化
+                sb.Append(b.ToString("x2"));
+            }
+            return sb.ToString();
         }
     }
 }

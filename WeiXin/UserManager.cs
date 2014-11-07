@@ -21,17 +21,14 @@ namespace YuChang.Core
             this.secret = secret;
         }
 
-        private bool Valid
+        private bool IsValid()
         {
-            get
-            {
-                return (DateTime.Now - this.createDateTime).TotalSeconds < expiresIn;
-            }
+            return (DateTime.Now - this.createDateTime).TotalSeconds < expiresIn;
         }
 
         public override string ToString()
         {
-            if (this.token != null && Valid)
+            if (this.token != null && IsValid())
                 return this.token;
 
             var url = string.Format("token?grant_type=client_credential&appid={0}&secret={1}", appid, secret);
@@ -60,7 +57,7 @@ namespace YuChang.Core
         public const string RequestRoot = "https://api.weixin.qq.com/cgi-bin/";
     }
 
-    public class UserInfo 
+    public class UserInfo
     {
         public string OpenId { get; set; }
 
@@ -128,7 +125,7 @@ namespace YuChang.Core
         //    return GetUserInfo<UserInfo>(userOpenId);
         //}
 
-        public UserInfo GetUserInfo(string userOpenId) 
+        public UserInfo GetUserInfo(string userOpenId)
         {
             var url = string.Format("user/info?access_token={0}&openid={1}&lang=zh_CN",
                                     accessToken, userOpenId);
