@@ -1,9 +1,0 @@
-D:\MyProjects\WeiXin\WeiXin\bin\Debug\YuChang.Core.dll
-D:\MyProjects\WeiXin\WeiXin\bin\Debug\YuChang.Core.pdb
-D:\MyProjects\WeiXin\WeiXin\obj\Debug\YuChang.Core.dll
-D:\MyProjects\WeiXin\WeiXin\obj\Debug\YuChang.Core.pdb
-D:\MyProjects\YuChang\WeiXin\bin\Debug\YuChang.Core.dll
-D:\MyProjects\YuChang\WeiXin\bin\Debug\YuChang.Core.pdb
-D:\MyProjects\YuChang\WeiXin\obj\Debug\WeiXin.csprojResolveAssemblyReference.cache
-D:\MyProjects\YuChang\WeiXin\obj\Debug\YuChang.Core.dll
-D:\MyProjects\YuChang\WeiXin\obj\Debug\YuChang.Core.pdb
