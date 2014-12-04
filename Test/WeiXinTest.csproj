@@ -84,6 +84,7 @@
     <Compile Include="ReplyTest.cs" />
     <Compile Include="ShoppingManagerTest.cs" />
     <Compile Include="ShouTaoMessageProcesserTest.cs" />
+    <Compile Include="TemplateManagerTest.cs" />
     <Compile Include="UserManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>

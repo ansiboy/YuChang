@@ -280,8 +280,17 @@ namespace YuChang.Core
             return valuePairs[value];
         }
 
-
         internal static string Serialize(Dictionary<string, string> values)
+        {
+            return Serialize(values as object);
+        }
+
+        internal static string Serialize(Dictionary<string, object> values)
+        {
+            return Serialize(values as object);
+        }
+
+        private static string Serialize(object values)
         {
             var serial = new System.Web.Script.Serialization.JavaScriptSerializer();
             var str = serial.Serialize(values);

@@ -67,6 +67,7 @@
     <Compile Include="Models\VoiceMessage.cs" />
     <Compile Include="Models\VoiceReply.cs" />
     <Compile Include="ShoppingManager.cs" />
+    <Compile Include="Template.cs" />
     <Compile Include="tenpayLib\MD5Util.cs" />
     <Compile Include="tenpayLib\RequestHandler.cs" />
     <Compile Include="tenpayLib\ResponseHandler.cs" />
