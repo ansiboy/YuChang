@@ -6,3 +6,5 @@
 /Web/bin
 /WeiXin/obj
 /WeiXin/bin
+/Test/*.user
+/Test/ShoppingManagerTest.cs
