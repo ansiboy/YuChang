@@ -47,6 +47,7 @@
     <Compile Include="CustomMenu.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="MessageProcesser.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Button.cs" />
     <Compile Include="Models\EventMessage.cs" />
     <Compile Include="Models\EventType.cs" />
@@ -54,14 +55,15 @@
     <Compile Include="Models\ImageTextMessage.cs" />
     <Compile Include="Models\LinkMessage.cs" />
     <Compile Include="Models\LocationMessage.cs" />
+    <Compile Include="Models\MusicMessage.cs" />
     <Compile Include="Models\PostMessage.cs" />
     <Compile Include="Models\MessageType.cs" />
-    <Compile Include="Models\MusicMessage.cs" />
     <Compile Include="Models\Template.cs" />
     <Compile Include="Models\TemplateSendJobFinishEvent.cs" />
     <Compile Include="Models\TextMessage.cs" />
     <Compile Include="Models\TransferCustomerServiceMessage.cs" />
     <Compile Include="Models\UndetectedMessage.cs" />
+    <Compile Include="Models\UnsubscribeEvent.cs" />
     <Compile Include="PromoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\VideoMessage.cs" />

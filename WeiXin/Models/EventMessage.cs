@@ -38,15 +38,6 @@ namespace YuChang.Core.Models
         public string Ticket { get; set; }
     }
 
-    public class UnsubscribeEvent : EventMessage
-    {
-        public UnsubscribeEvent()
-            : base(EventType.Unsubscribe)
-        {
-
-        }
-    }
-
     public class ScanEvent : EventMessage
     {
         public ScanEvent()
