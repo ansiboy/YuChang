@@ -6,6 +6,9 @@ using YuChang.Core.Models;
 
 namespace YuChang.Core
 {
+    /// <summary>
+    /// MessageProcesser 封装了微信公众号平台的消息处理。
+    /// </summary>
     public class MessageProcesser
     {
         public Message Process(string xml)

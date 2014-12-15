@@ -10,6 +10,9 @@ using YuChang.Core.Models;
 
 namespace YuChang.Core
 {
+    /// <summary>
+    /// CustomMenu 封装了自定义菜单的操作
+    /// </summary>
     public class CustomMenu
     {
         private AccessToken accessToken;
@@ -19,6 +22,10 @@ namespace YuChang.Core
             this.accessToken = accessToken;
         }
 
+        /// <summary>
+        /// 获取公众号的自定义菜单
+        /// </summary>
+        /// <returns>零个或多个 Button 对象</returns>
         public IEnumerable<Button> GetMenu()
         {
             var url = string.Format("menu/get?access_token={0}", this.accessToken);
@@ -41,6 +48,10 @@ namespace YuChang.Core
             return buttons;
         }
 
+        /// <summary>
+        /// 生成公众号的自定义菜单
+        /// </summary>
+        /// <param name="buttons">零个或多个 Button 对象</param>
         public void SaveMenu(IEnumerable<Button> buttons)
         {
             var url = string.Format("menu/create?access_token={0}", this.accessToken);

@@ -5,7 +5,10 @@ using System.Text;
 
 namespace YuChang.Core
 {
-     public class AccessToken
+    /// <summary>
+    /// 将微信接口中的accessToken封装为对象，并且能自动进行继约。
+    /// </summary>
+    public class AccessToken
     {
         private string appid;
         private string secret;
@@ -13,6 +16,11 @@ namespace YuChang.Core
         private int expiresIn;
         private DateTime createDateTime;
 
+        /// <summary>
+        /// AccessToken 的构造函数
+        /// </summary>
+        /// <param name="appid">公众号的应用ID</param>
+        /// <param name="secret">公众号的应用密钥</param>
         public AccessToken(string appid, string secret)
         {
             this.appid = appid;
@@ -34,16 +42,22 @@ namespace YuChang.Core
             var data = Utility.GetWeiXinJson(url);
             this.expiresIn = (int)data["expires_in"];
             this.token = data["access_token"] as string;
-            this.createDateTime = DateTime.Now;     //娉¨锛氬垱寤烘椂闂村拷鐣ョ綉缁滅殑寤舵椂
+            this.createDateTime = DateTime.Now;
 
             return this.token;
         }
 
+        /// <summary>
+        /// 公众号的应用ID
+        /// </summary>
         public string AppId
         {
             get { return this.appid; }
         }
 
+        /// <summary>
+        /// 公众号的应用密钥
+        /// </summary>
         public string Secret
         {
             get { return this.secret; }
