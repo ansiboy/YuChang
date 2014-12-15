@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeiXin.Models;
 using YuChang.Core.Models;
 
 namespace YuChang.Core
@@ -30,6 +29,8 @@ namespace YuChang.Core
                             return ProcessUnsubscribeEvent((UnsubscribeEvent)msg);
                         case EventType.View:
                             return ProcessViewEvent((ViewEvent)msg);
+                        case EventType.TemplateSendJobFinish:
+                            return ProcessTemplateSendJobFinishEvent((TemplateSendJobFinishEvent)msg);
                     }
                     break;
                 case Models.MessageType.Image:
@@ -46,6 +47,11 @@ namespace YuChang.Core
                     return ProcessVoiceMessage((VoiceMessage)msg);
             }
             return null;
+        }
+
+        private Message ProcessTemplateSendJobFinishEvent(TemplateSendJobFinishEvent msg)
+        {
+            return DefaultProcess(msg);
         }
 
         protected virtual Message ProcessViewEvent(ViewEvent msg)

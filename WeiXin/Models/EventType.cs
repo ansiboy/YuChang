@@ -12,6 +12,7 @@ namespace YuChang.Core.Models
         Scan,
         Location,
         Click,
-        View
+        View,
+        TemplateSendJobFinish,
     }
 }

@@ -200,13 +200,55 @@ namespace Test
 </Articles>
 </xml>";
             var msg = Message.FromXml(xml);
+            Assert.IsNotNull(msg);
             Assert.AreEqual(MessageType.ImageText, msg.MsgType);
 
             var news = (ImageTextMessage)msg;
             Assert.AreEqual(2, news.ArticleCount);
+
+            Assert.AreEqual("title1", news.Articles[0].Title);
+            Assert.AreEqual("title", news.Articles[1].Title);
         }
 
+        [TestMethod]
+        public void ConvertImageTextTest()
+        {
+            var img_text = new ImageTextMessage();
+            img_text.CreateTime = DateTime.Now;
+            img_text.Articles.Add(new Article
+            {
+                Description = "description",
+                PicUrl = "picurl",
+                Title = "title",
+                Url = "url"
+            });
 
+            var xml = img_text.ToXml();
+
+        }
+
+        [TestMethod]
+        public void ConvertMusicTest()
+        {
+            var img_text = new MusicMessage()
+            {
+                CreateTime = DateTime.Now,
+                Description = "description",
+                HQMusicUrl = "URL",
+                MusicURL = "URL",
+            };
+            //img_text.CreateTime = DateTime.Now;
+            //img_text..Add(new Article
+            //{
+            //    Description = "description",
+            //    PicUrl = "picurl",
+            //    Title = "title",
+            //    Url = "url"
+            //});
+
+            var xml = img_text.ToXml();
+
+        }
 
         int ConvertDateTime(System.DateTime time)
         {

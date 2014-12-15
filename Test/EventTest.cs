@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
 using YuChang.Core.Models;
 using System.Data.SqlClient;
+using YuChang.Core;
 
 namespace Test
 {
@@ -171,9 +172,26 @@ namespace Test
             Message.FromXml(xml);
         }
 
-        public void Temp()
+        [TestMethod]
+        public void TemplateSendJobFinishEvent()
         {
+            var xml = @"
+<xml><ToUserName><![CDATA[gh_26fac8adcd13]]></ToUserName>
+<FromUserName><![CDATA[o1Ux1uP_0TDyXNvZjrKwOyn0Aprs]]></FromUserName>
+<CreateTime>1418619744</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[TEMPLATESENDJOBFINISH]]></Event>
+<MsgID>201843808</MsgID>
+<Status><![CDATA[success]]></Status>
+</xml>
+";
+            // Message.FromXml(xml);
+            var msg = Message.FromXml(xml) as TemplateSendJobFinishEvent;
+            Assert.IsNotNull(msg);
+            Assert.AreEqual(EventType.TemplateSendJobFinish, msg.Event);
 
+            var p = new MessageProcesser();
+            p.Process(xml);
         }
     }
 }

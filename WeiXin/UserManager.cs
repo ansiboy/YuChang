@@ -7,56 +7,6 @@ using System.Collections;
 
 namespace YuChang.Core
 {
-    public class AccessToken
-    {
-        private string appid;
-        private string secret;
-        private string token;
-        private int expiresIn;
-        private DateTime createDateTime;
-
-        public AccessToken(string appid, string secret)
-        {
-            this.appid = appid;
-            this.secret = secret;
-        }
-
-        private bool IsValid()
-        {
-            return (DateTime.Now - this.createDateTime).TotalSeconds < expiresIn;
-        }
-
-        public override string ToString()
-        {
-            if (this.token != null && IsValid())
-                return this.token;
-
-            var url = string.Format("token?grant_type=client_credential&appid={0}&secret={1}", appid, secret);
-
-            var data = Utility.GetWeiXinJson(url);
-            this.expiresIn = (int)data["expires_in"];
-            this.token = data["access_token"] as string;
-            this.createDateTime = DateTime.Now;     //注：创建时间忽略网络的延时
-
-            return this.token;
-        }
-
-        public string AppId
-        {
-            get { return this.appid; }
-        }
-
-        public string Secret
-        {
-            get { return this.secret; }
-        }
-    }
-
-    internal class Constants
-    {
-        public const string RequestRoot = "https://api.weixin.qq.com/cgi-bin/";
-    }
-
     public class UserInfo
     {
         public string OpenId { get; set; }
@@ -119,11 +69,6 @@ namespace YuChang.Core
         {
             this.accessToken = accessToken;
         }
-
-        //public UserInfo GetUserInfo(string userOpenId)
-        //{
-        //    return GetUserInfo<UserInfo>(userOpenId);
-        //}
 
         public UserInfo GetUserInfo(string userOpenId)
         {

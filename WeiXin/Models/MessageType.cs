@@ -8,31 +8,39 @@ namespace YuChang.Core.Models
 {
     public enum MessageType
     {
-        [Description("Text")]
+        [Description("text")]
         Text,
 
-        [Description("Image")]
+        [Description("image")]
         Image,
 
-        [Description("Voice")]
+        [Description("voice")]
         Voice,
 
-        [Description("Video")]
+        [Description("video")]
         Video,
 
-        [Description("Location")]
+        [Description("location")]
         Location,
 
-        [Description("Link")]
+        [Description("link")]
         Link,
 
-        [Description("Event")]
+        [Description("event")]
         Event,
 
         [Description("transfer_customer_service")]
         TransferCustomerService,
 
-        [Description("ImageText")]
-        ImageText
+        [Description("news")]
+        ImageText,
+
+        [Description("music")]
+        Music,
+
+        /// <summary>
+        /// 未匹配的消息
+        /// </summary>
+        Undetected,
     }
 }

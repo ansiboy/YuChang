@@ -23,4 +23,6 @@ namespace YuChang.Core.Models
         /// </summary>
         public long MsgId { get; set; }
     }
+
+
 }

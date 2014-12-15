@@ -54,6 +54,8 @@ namespace YuChang.Core.Models
                     return ParseXmlToModel<TextMessage>(element);
                 case "image":
                     return ParseXmlToModel<ImageMessage>(element);
+                case "news":
+                    return ParseXmlToModel<ImageTextMessage>(element);
                 case "voice":
                     return ParseXmlToModel<VoiceMessage>(element);
                 case "video":
@@ -86,14 +88,19 @@ namespace YuChang.Core.Models
                             return ParseXmlToModel<ClickEvent>(element);
                         case "view":
                             return ParseXmlToModel<ViewEvent>(element);
+                        case "templatesendjobfinish":
+                            return ParseXmlToModel<TemplateSendJobFinishEvent>(element);
                     }
                     break;
             }
-            return null;
+            return ParseXmlToModel<UndetectedMessage>(element);
         }
 
-        internal static T ParseXmlToModel<T>(XmlElement element)
+        internal static T ParseXmlToModel<T>(XmlNode element) where T : class
         {
+            if (typeof(T) == typeof(ImageTextMessage))
+                return ParseXmlToImageText(element) as T;
+
             var model = Activator.CreateInstance<T>();
             var properties = typeof(T).GetProperties();
             foreach (var p in properties)
@@ -108,7 +115,34 @@ namespace YuChang.Core.Models
             return model;
         }
 
-        static object GetPropertyValue(XmlElement rootElement, PropertyInfo property)
+        internal static ImageTextMessage ParseXmlToImageText(XmlNode element)
+        {
+            var model = new ImageTextMessage();
+            var properties = typeof(ImageTextMessage).GetProperties();
+            foreach (var p in properties)
+            {
+                if (p.CanWrite == false)
+                    continue;
+
+                if (p.Name == "Articles")
+                {
+                    var articlesNode = element.SelectSingleNode("Articles");
+                    foreach (XmlNode c in articlesNode.ChildNodes)
+                    {
+                        var childArticle = ParseXmlToModel<Article>(c);
+                        model.Articles.Add(childArticle);
+                    }
+                    continue;
+                }
+
+                var value = GetPropertyValue(element, p);
+                p.SetValue(model, value, null);
+            }
+
+            return model;
+        }
+
+        static object GetPropertyValue(XmlNode rootElement, PropertyInfo property)
         {
             var node = rootElement.SelectSingleNode(property.Name);
             if (node == null)
@@ -128,6 +162,8 @@ namespace YuChang.Core.Models
                 return value;
             }
 
+
+
             return Convert.ChangeType(valueText, property.PropertyType);
         }
 
@@ -146,53 +182,79 @@ namespace YuChang.Core.Models
 
         public string ToXml()
         {
-            var element = ParseModelToXml(this);
+            var element = ParseModelToXml();
             var xml = element.OuterXml;
             return xml;
         }
 
-        static XmlElement ParseModelToXml(object model)
+        protected virtual XmlElement ParseModelToXml()
         {
-            if (model == null)
-                throw Error.ArugmentNull("model");
 
             var doc = new XmlDocument();
             var root = (XmlElement)doc.CreateNode(XmlNodeType.Element, "xml", null);
-            var properties = (PropertyInfo[])model.GetType().GetProperties();
+            var properties = (PropertyInfo[])this.GetType().GetProperties();
             foreach (var property in properties)
             {
-                var value = property.GetValue(model, null);
-                var child = doc.CreateNode(XmlNodeType.Element, property.Name, null);
-                if (property.PropertyType == typeof(DateTime))
-                {
-                    child.InnerText = ConvertDateTime((DateTime)value).ToString();
-                }
-                else if (property.PropertyType == typeof(String))
-                {
-                    child.AppendChild(doc.CreateCDataSection(value as string));
-                }
-                else if (typeof(Enum).IsAssignableFrom(property.PropertyType))
-                {
-                    var str = Utility.ConvertEnumValue(property.PropertyType, value);
-                    child.AppendChild(doc.CreateCDataSection(str));
-
-                    //var attr = (DescriptionAttribute)property.GetCustomAttributes(typeof(DescriptionAttribute), false).SingleOrDefault();
-                    //if (attr != null)
-                    //    child.AppendChild(doc.CreateCDataSection(attr.Description));
-                    //else
-                    //    child.AppendChild(doc.CreateCDataSection(value.ToString().ToLower()));
-                }
-                else
-                {
-                    child.AppendChild(doc.CreateCDataSection(value.ToString()));
-                }
+                var child = ParsePropertyToNode(doc, property);
                 root.AppendChild(child);
             }
 
             return root;
         }
 
-        static int ConvertDateTime(System.DateTime time)
+        protected virtual XmlNode ParsePropertyToNode(XmlDocument doc, PropertyInfo property)
+        {
+            return ParsePropertyToNode(doc, property, this);
+        }
+
+        XmlNode ParseModelToNode(XmlDocument doc, object model)
+        {
+            return ParseModelToNode(doc, model, "xml");
+        }
+
+        protected static XmlNode ParseModelToNode(XmlDocument doc, object model, string nodeName)
+        {
+            if (model == null)
+                throw Error.ArugmentNull("model");
+
+            //var doc = new XmlDocument();
+            var root = (XmlElement)doc.CreateNode(XmlNodeType.Element, nodeName, null);
+            var properties = (PropertyInfo[])model.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                var child = ParsePropertyToNode(doc, property, model);
+                root.AppendChild(child);
+            }
+
+            return root;
+        }
+
+        protected static XmlNode ParsePropertyToNode(XmlDocument doc, PropertyInfo property, object model)
+        {
+            var value = property.GetValue(model, null);
+            var child = doc.CreateNode(XmlNodeType.Element, property.Name, null);
+            if (property.PropertyType == typeof(DateTime))
+            {
+                child.InnerText = ConvertDateTime((DateTime)value).ToString();
+            }
+            else if (property.PropertyType == typeof(String))
+            {
+                child.AppendChild(doc.CreateCDataSection(value as string));
+            }
+            else if (typeof(Enum).IsAssignableFrom(property.PropertyType))
+            {
+                var str = Utility.ConvertEnumValue(property.PropertyType, value);
+                child.AppendChild(doc.CreateCDataSection(str));
+            }
+            else
+            {
+                child.AppendChild(doc.CreateCDataSection(value.ToString()));
+            }
+
+            return child;
+        }
+
+        protected static int ConvertDateTime(System.DateTime time)
         {
 
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));

@@ -114,4 +114,6 @@ namespace YuChang.Core.Models
 
         public string EventKey { get; set; }
     }
+
+    
 }
