@@ -75,6 +75,7 @@
     <Compile Include="tenpayLib\ResponseHandler.cs" />
     <Compile Include="tenpayLib\SHA1Util.cs" />
     <Compile Include="tenpayLib\TenpayUtil.cs" />
+    <Compile Include="TicketGenerator.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>

@@ -83,6 +83,7 @@
     <Compile Include="EventTest.cs" />
     <Compile Include="ReplyTest.cs" />
     <Compile Include="TemplateManagerTest.cs" />
+    <Compile Include="TicketGeneratorTest.cs" />
     <Compile Include="UserManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>

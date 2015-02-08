@@ -31,13 +31,6 @@ namespace Test
             Assert.AreEqual(1403518265, ConvertDateTime(msg.CreateTime));
             Assert.AreEqual(MessageType.Event, msg.MsgType);
             Assert.AreEqual(EventType.Subscribe, msg.Event);
-
-            var appid = "wxe621f4e5e90b13cd";//, "7cb56e5b6bd302ddb73c4f76a9ec26a2"
-            var secret = "7cb56e5b6bd302ddb73c4f76a9ec26a2";
-            var connstr = System.Configuration.ConfigurationManager.AppSettings["UICRM.Shopping.Properties.Settings.VkNewUICRMConnectionString"];
-            var conn = new SqlConnection(connstr);
-            var p = new YuChang.Web.MessageProcesser(appid, secret, conn);
-            p.Process(xml);
         }
 
         [TestMethod]

@@ -15,7 +15,12 @@ namespace YuChang.Core
     {
         public static Encoding DefaultEncoding = Encoding.UTF8;
 
-        public static Dictionary<string, object> GetWeiXinJson(string url, Dictionary<string, string> values = null)
+        public static Dictionary<string, object> GetWeiXinJson(string url)
+        {
+            return GetWeiXinJson(url, "");
+        }
+
+        public static Dictionary<string, object> GetWeiXinJson(string url, Dictionary<string, string> values)
         {
             if (values == null)
             {
@@ -100,7 +105,7 @@ namespace YuChang.Core
             var client = new WebClient();
             client.Encoding = DefaultEncoding;
             var str = client.UploadString(url, "post", postString);
-            var data =Deserialize<Dictionary<string, object>>(str);
+            var data = Deserialize<Dictionary<string, object>>(str);
 
             return data;
         }
