@@ -46,6 +46,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="CustomMenu.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="Media.cs" />
     <Compile Include="MessageProcesser.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Button.cs" />

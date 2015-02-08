@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="AccessTokenTest.cs" />
     <Compile Include="CustomMenu.cs" />
+    <Compile Include="MediaTest.cs" />
     <Compile Include="MessageTest.cs" />
     <Compile Include="PromoteServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
