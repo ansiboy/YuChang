@@ -37,14 +37,36 @@ namespace YuChang.Core
             if (this.token != null && IsValid())
                 return this.token;
 
-            var url = string.Format("token?grant_type=client_credential&appid={0}&secret={1}", appid, secret);
+            IsUsing = true;
 
-            var data = Utility.GetWeiXinJson(url);
-            this.expiresIn = (int)data["expires_in"];
-            this.token = data["access_token"] as string;
-            this.createDateTime = DateTime.Now;
+            try
+            {
+                var url = string.Format("token?grant_type=client_credential&appid={0}&secret={1}", appid, secret);
 
-            return this.token;
+                var data = Utility.GetWeiXinJson(url);
+                object errcode;
+                if (data.TryGetValue("errcode", out errcode))
+                {
+                    var msg = (string)data["errmsg"];
+                    throw Error.WeiXinError((int)errcode, msg);
+                }
+
+                this.expiresIn = (int)data["expires_in"];
+                this.token = data["access_token"] as string;
+                this.createDateTime = DateTime.Now;
+
+                return this.token;
+            }
+            finally
+            {
+                IsUsing = false;
+            }
+        }
+
+        internal bool IsUsing
+        {
+            get;
+            private set;
         }
 
         /// <summary>

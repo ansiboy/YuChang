@@ -15,11 +15,11 @@ namespace YuChang.Core
         Thumb
     }
 
-    public class Media
+    public class MediaManager
     {
         private AccessToken accessToken;
 
-        public Media(AccessToken accessToken)
+        public MediaManager(AccessToken accessToken)
         {
             this.accessToken = accessToken;
         }

@@ -152,12 +152,26 @@ namespace tenpayApp
             {
                 string v = (string)parameters[k];
                 if (null != v && "".CompareTo(v) != 0
-                    && "sign".CompareTo(k) != 0 && "".CompareTo(v) != 0)
+                    && "sign".CompareTo(k) != 0 && "key".CompareTo(v) != 0)
                 {
                     sb.Append(k + "=" + v + "&");
                 }
             }
-            string sign = MD5Util.GetMD5(sb.ToString(), getCharset()).ToLower();
+
+            if (string.IsNullOrEmpty(this.getKey()))
+                throw Error.KeyRequired();
+
+            sb.Append("key=" + this.getKey());
+
+
+
+            //去掉最后一个&
+            if (sb.Length > 0 && sb[sb.Length-1] == '&')
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
+
+            string sign = MD5Util.GetMD5(sb.ToString(), getCharset()).ToUpper();
 
             this.setParameter("sign", sign);
             return sign;

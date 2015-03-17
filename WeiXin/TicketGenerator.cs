@@ -13,6 +13,14 @@ namespace YuChang.Core
         {
             string url = string.Format("ticket/getticket?access_token={0}&type=jsapi", this.accessToken);
             Dictionary<string, object> weiXinJson = Utility.GetWeiXinJson(url);
+            object errorCode;
+            if (weiXinJson.TryGetValue("errcode", out errorCode) && (int)errorCode != 0)
+            {
+                var code = (int)errorCode;
+                var msg = (string)weiXinJson["errmsg"];
+                throw Error.WeiXinError(code, msg);
+            }
+
             return (string)weiXinJson["ticket"];
         }
     }

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessToken.cs" />
+    <Compile Include="AccessTokenPool.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="CustomMenu.cs" />
     <Compile Include="Error.cs" />
@@ -65,12 +66,14 @@
     <Compile Include="Models\TransferCustomerServiceMessage.cs" />
     <Compile Include="Models\UndetectedMessage.cs" />
     <Compile Include="Models\UnsubscribeEvent.cs" />
+    <Compile Include="PayManager.cs" />
     <Compile Include="PromoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\VideoMessage.cs" />
     <Compile Include="Models\VoiceMessage.cs" />
     <Compile Include="ShoppingManager.cs" />
     <Compile Include="TemplateManager.cs" />
+    <Compile Include="tenpayLib\Error.cs" />
     <Compile Include="tenpayLib\MD5Util.cs" />
     <Compile Include="tenpayLib\RequestHandler.cs" />
     <Compile Include="tenpayLib\ResponseHandler.cs" />

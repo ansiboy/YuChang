@@ -10,28 +10,20 @@ namespace Web1.Controllers
 {
     public class YuChangController : Controller
     {
-        DbConnection CreateConnection()
+        /// <summary>
+        /// 获取用户的信息，用户的信息将写入到 Cookie 。
+        /// </summary>
+        public ActionResult LoadUserInfo()
         {
-            var conn = "";
-            return new SqlConnection(conn);
+            return View();
         }
 
-        public ActionResult Index()
+        /// <summary>
+        /// 获取微信的版本号
+        /// </summary>
+        public JsonResult GetWeiXinVersion()
         {
-            //
-            var conn = CreateConnection();
-            try
-            {
-                conn.Open();
-                var command = conn.CreateCommand();
-                command.CommandText = "Select Id, [Message] Where MessageType = @messageType and EventType = @eventType";
-          
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return Content("");
+            return Json(new { Version = "" });
         }
 
     }

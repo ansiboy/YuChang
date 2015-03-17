@@ -10,11 +10,18 @@ namespace YuChang.Core
         public WeiXinException(int code, string msg)
             : base(msg)
         {
+            this.Code = code.ToString();
+            this.Message = msg;
+        }
+
+        public WeiXinException(string code, string msg)
+            : base(msg)
+        {
             this.Code = code;
             this.Message = msg;
         }
 
-        public int Code
+        public string Code
         {
             get;
             private set;
@@ -41,6 +48,12 @@ namespace YuChang.Core
             return exc;
         }
 
+        internal static Exception WeiXinError(string code, string msg)
+        {
+            var exc = new WeiXinException(code, msg);
+            return exc;
+        }
+
         internal static Exception MissKeyValue(string key)
         {
             var msg = string.Format("The dictionary is not contains key '{0}'.", key);
@@ -53,6 +66,18 @@ namespace YuChang.Core
         internal static Exception NotImplemented()
         {
             return new NotImplementedException();
+        }
+
+        internal static Exception AppIdIsRequired()
+        {
+            var msg = "AppId is required.";
+            return new Exception(msg);
+        }
+
+        internal static Exception AppSecretRequired()
+        {
+            var msg = "AppSecret is required.";
+            return new Exception(msg);
         }
     }
 }

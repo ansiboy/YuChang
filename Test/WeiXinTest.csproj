@@ -79,6 +79,7 @@
     <Compile Include="CustomMenu.cs" />
     <Compile Include="MediaTest.cs" />
     <Compile Include="MessageTest.cs" />
+    <Compile Include="PayManager.cs" />
     <Compile Include="PromoteServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventTest.cs" />
