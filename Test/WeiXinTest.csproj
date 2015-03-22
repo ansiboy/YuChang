@@ -86,6 +86,7 @@
     <Compile Include="TemplateManagerTest.cs" />
     <Compile Include="TicketGeneratorTest.cs" />
     <Compile Include="UserManagerTest.cs" />
+    <Compile Include="WeiXinTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Web\Web.csproj">

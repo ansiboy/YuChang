@@ -2,40 +2,49 @@
 using System.Collections.Generic;
 namespace YuChang.Core
 {
-    public class AccessTokenPool
+    public static class AccessTokenPool
     {
-        private static List<AccessToken> accessTokens = new List<AccessToken>();
-        public static string AppId
+        private static Dictionary<string, List<AccessToken>> dic_accessTokens
+            = new Dictionary<string, List<AccessToken>>();
+
+        private static Dictionary<string, string> secrets = new Dictionary<string, string>();
+
+        public static AccessToken GetAccessToken(string appid, string secret)
         {
-            get;
-            set;
-        }
-        public static string AppSecret
-        {
-            get;
-            set;
-        }
-        public static AccessToken GetAccessToken()
-        {
-            AccessToken result;
-            for (int i = 0; i < AccessTokenPool.accessTokens.Count; i++)
+            List<AccessToken> accessTokens;
+            if (dic_accessTokens.TryGetValue(appid, out accessTokens) == false)
             {
-                if (!AccessTokenPool.accessTokens[i].IsUsing)
+                dic_accessTokens[appid] = accessTokens = new List<AccessToken>();
+            }
+
+            string old_secret;
+            if (secrets.TryGetValue(appid, out old_secret) == false)
+            {
+                secrets[appid] = old_secret = secret;
+            }
+
+            if (old_secret != secret)
+                dic_accessTokens[appid] = new List<AccessToken>();
+
+            AccessToken result;
+            for (int i = 0; i < accessTokens.Count; i++)
+            {
+                if (!accessTokens[i].IsUsing)
                 {
-                    result = AccessTokenPool.accessTokens[i];
+                    result = accessTokens[i];
                     return result;
                 }
             }
-            if (string.IsNullOrEmpty(AccessTokenPool.AppId))
-            {
-                throw Error.AppIdIsRequired();
-            }
-            if (string.IsNullOrEmpty(AccessTokenPool.AppSecret))
-            {
-                throw Error.AppSecretRequired();
-            }
-            AccessToken accessToken = new AccessToken(AccessTokenPool.AppId, AccessTokenPool.AppSecret);
-            AccessTokenPool.accessTokens.Add(accessToken);
+            //if (string.IsNullOrEmpty(AccessTokenPool.AppId))
+            //{
+            //    throw Error.AppIdIsRequired();
+            //}
+            //if (string.IsNullOrEmpty(AccessTokenPool.AppSecret))
+            //{
+            //    throw Error.AppSecretRequired();
+            //}
+            AccessToken accessToken = new AccessToken(appid, secret);
+            accessTokens.Add(accessToken);
             result = accessToken;
             return result;
         }

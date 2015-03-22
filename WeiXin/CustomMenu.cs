@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using tenpayApp;
 using YuChang.Core.Models;
+using Button = YuChang.Core.Models.Button;
 
 namespace YuChang.Core
 {
@@ -26,7 +27,7 @@ namespace YuChang.Core
         /// 获取公众号的自定义菜单
         /// </summary>
         /// <returns>零个或多个 Button 对象</returns>
-        public IEnumerable<Button> GetMenu()
+        public IEnumerable<Models.Button> GetMenu()
         {
             var url = string.Format("menu/get?access_token={0}", this.accessToken);
             var data = Utility.GetWeiXinJson(url);
@@ -39,10 +40,10 @@ namespace YuChang.Core
                 throw Error.MissKeyValue("button");
 
             var buttonArray = buttonData as System.Collections.IEnumerable;
-            var buttons = new List<Button>();
+            var buttons = new List<Models.Button>();
             foreach (object item in buttonArray)
             {
-                var button = Utility.ParseObjectFromDictionary<Button>((Dictionary<string, object>)item);
+                var button = Utility.ParseObjectFromDictionary<Models.Button>((Dictionary<string, object>)item);
                 buttons.Add(button);
             }
             return buttons;
@@ -52,7 +53,7 @@ namespace YuChang.Core
         /// 生成公众号的自定义菜单
         /// </summary>
         /// <param name="buttons">零个或多个 Button 对象</param>
-        public void SaveMenu(IEnumerable<Button> buttons)
+        public void SaveMenu(IEnumerable<Models.Button> buttons)
         {
             var url = string.Format("menu/create?access_token={0}", this.accessToken);
             var btn_data = new ArrayList();

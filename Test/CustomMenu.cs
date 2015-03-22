@@ -27,16 +27,16 @@ namespace WeiXin.Test
             var appid = "wxa22b9cfd8fdec01a";
             var secret = "d383a6032a4cef3dc22ba9c5130b60e2";
 
-//            wxa22b9cfd8fdec01a
-//AppSecret(应用密钥) d383a6032a4cef3dc22ba9c5130b60e2 重置
+            //            wxa22b9cfd8fdec01a
+            //AppSecret(应用密钥) d383a6032a4cef3dc22ba9c5130b60e2 重置
 
             var cm = new CustomMenu(new AccessToken(appid, secret));
             var buttons = cm.GetMenu().ToArray();
 
-            var button = new Button();
+            var button = new YuChang.Core.Models.Button();
             button.Key = "OnlineCustomerService";
             button.Name = "在线客服";
-            button.Type = ButtonType.Click;
+            button.Type = YuChang.Core.Models.ButtonType.Click;
 
             var btns = buttons[2].Children.Where(o => o.Name == "在线客户").ToArray();
             foreach (var b in btns)

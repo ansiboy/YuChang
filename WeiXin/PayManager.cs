@@ -47,7 +47,11 @@ namespace YuChang.Core
             xmlDocument.LoadXml(xml);
             XmlElement[] source = xmlDocument.FirstChild.ChildNodes.Cast<XmlElement>().ToArray<XmlElement>();
             string innerText = source.Single((XmlElement o) => o.Name == "return_code").InnerText;
-            if (!(innerText != "SUCCESS"))
+
+            var err_code = source.Where(o => o.Name == "err_code").Select(o => o.InnerText).SingleOrDefault();
+            var err_code_des = source.Where(o => o.Name == "err_code_des").Select(o => o.InnerText).SingleOrDefault();
+
+            if (innerText == "SUCCESS" && err_code == null)
             {
                 return source.Single((XmlElement o) => o.Name == "prepay_id").InnerText;
             }
@@ -55,14 +59,16 @@ namespace YuChang.Core
             //    from o in source
             //    where o.Name == "err_code"
             //    select o.InnerText).SingleOrDefault<string>();
-            string text3 = (
-                from o in source
-                where o.Name == "err_code_des"
-                select o.InnerText).SingleOrDefault<string>();
-            if (text2 != null && text3 != null)
+            //string text3 = (
+            //    from o in source
+            //    where o.Name == "err_code_des"
+            //    select o.InnerText).SingleOrDefault<string>();
+
+            if (err_code != null && err_code_des != null)
             {
-                throw Error.WeiXinError(text2, text3);
+                throw Error.WeiXinError(err_code, err_code_des);
             }
+
             string msg = (
                 from o in source
                 where o.Name == "return_msg"

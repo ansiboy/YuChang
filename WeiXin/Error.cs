@@ -8,7 +8,7 @@ namespace YuChang.Core
     public class WeiXinException : Exception
     {
         public WeiXinException(int code, string msg)
-            : base(msg)
+            : base(code + ":" + msg)
         {
             this.Code = code.ToString();
             this.Message = msg;
@@ -78,6 +78,12 @@ namespace YuChang.Core
         {
             var msg = "AppSecret is required.";
             return new Exception(msg);
+        }
+
+        internal static Exception ArugmentError(string msg)
+        {
+            var exc = new ArgumentException(msg);
+            return exc;
         }
     }
 }
