@@ -2,7 +2,7 @@
 using System.Xml;
 namespace YuChang.Core.Models
 {
-    public class MusicMessage : Message
+    public class MusicMessage : NormalMessage
     {
         public string Title
         {
@@ -33,7 +33,14 @@ namespace YuChang.Core.Models
             : base(MessageType.Music)
         {
         }
-        protected override XmlElement ParseModelToXml()
+
+        public override string ToXml()
+        {
+            var element = ParseModelToXml();
+            return element.OuterXml;
+        }
+
+        XmlElement ParseModelToXml()
         {
             XmlDocument xmlDocument = new XmlDocument();
             XmlElement xmlElement = (XmlElement)xmlDocument.CreateNode(XmlNodeType.Element, "xml", null);

@@ -5,7 +5,7 @@ using YuChang.Core.Models;
 using System.Data.SqlClient;
 using YuChang.Core;
 
-namespace Test
+namespace YuChang.Test
 {
     [TestClass]
     public class EventTest
@@ -186,5 +186,7 @@ namespace Test
             var p = new MessageProcesser();
             p.Process(xml);
         }
+
+
     }
 }

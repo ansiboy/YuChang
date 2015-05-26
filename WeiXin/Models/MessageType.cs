@@ -29,11 +29,8 @@ namespace YuChang.Core.Models
         [Description("event")]
         Event,
 
-        [Description("transfer_customer_service")]
-        TransferCustomerService,
-
         [Description("news")]
-        ImageText,
+        News,
 
         [Description("music")]
         Music,
@@ -42,5 +39,9 @@ namespace YuChang.Core.Models
         /// 未匹配的消息
         /// </summary>
         Undetected,
+
+
     }
+
+    
 }

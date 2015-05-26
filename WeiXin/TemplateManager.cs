@@ -10,9 +10,9 @@ namespace YuChang.Core
 
     public class TemplateManager
     {
-        private AccessToken accessToken;
+        private access_token accessToken;
 
-        public TemplateManager(AccessToken accessToken)
+        public TemplateManager(access_token accessToken)
         {
             this.accessToken = accessToken;
         }

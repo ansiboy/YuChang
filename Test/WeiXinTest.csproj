@@ -6,8 +6,8 @@
     <ProjectGuid>{CC2CD79A-0BE1-4E0C-A400-518E041DA940}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WeiXin.Test</RootNamespace>
-    <AssemblyName>WeiXin.Test</AssemblyName>
+    <RootNamespace>YuChang.Test</RootNamespace>
+    <AssemblyName>YuChang.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -75,17 +75,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AccessTokenTest.cs" />
-    <Compile Include="CustomMenu.cs" />
-    <Compile Include="MediaTest.cs" />
+    <Compile Include="EventTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MessageTest.cs" />
-    <Compile Include="PromoteServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EventTest.cs" />
-    <Compile Include="ReplyTest.cs" />
-    <Compile Include="TemplateManagerTest.cs" />
-    <Compile Include="TicketGeneratorTest.cs" />
-    <Compile Include="UserManagerTest.cs" />
+    <Compile Include="TextMessageTest.cs" />
     <Compile Include="WeiXinTest.cs" />
   </ItemGroup>
   <ItemGroup>

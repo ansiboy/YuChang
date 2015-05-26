@@ -8,4 +8,13 @@ namespace YuChang.Core.Models
         {
         }
     }
+
+    public class UndetectedEvent : EventMessage
+    {
+        public UndetectedEvent()
+            : base(EventType.Undetected)
+        {
+
+        }
+    }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
-using WeiXin;
 using YuChang.Core.Models;
 
-namespace Test
+namespace YuChang.Test
 {
     [TestClass]
     public class MessageTest
@@ -201,7 +200,7 @@ namespace Test
 </xml>";
             var msg = Message.FromXml(xml);
             Assert.IsNotNull(msg);
-            Assert.AreEqual(MessageType.ImageText, msg.MsgType);
+            Assert.AreEqual(MessageType.News, msg.MsgType);
 
             var news = (ImageTextMessage)msg;
             Assert.AreEqual(2, news.ArticleCount);

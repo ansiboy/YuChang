@@ -17,7 +17,7 @@ namespace YuChang.Web
 
         public MessageProcesser(string appid, string secret, IDbConnection conn)
         {
-            this.accessToken = new AccessToken(appid, secret);
+            this.accessToken = AccessTokenPool.GetAccessToken(appid, secret); //new AccessToken(appid, secret);
             this.conn = conn;
         }
 

@@ -14,5 +14,6 @@ namespace YuChang.Core.Models
         Click,
         View,
         TemplateSendJobFinish,
+        Undetected,
     }
 }

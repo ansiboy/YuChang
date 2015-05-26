@@ -8,7 +8,7 @@ namespace YuChang.Core.Models
     /// <summary>
     /// 文本消息
     /// </summary>
-    public class TextMessage : Message
+    public class TextMessage : NormalMessage
     {
         public TextMessage()
             : base(MessageType.Text)
@@ -21,7 +21,12 @@ namespace YuChang.Core.Models
         /// <summary>
         /// 消息id
         /// </summary>
-        public long MsgId { get; set; }
+        public long MsgId { get; internal set; }
+
+        //protected override System.Xml.XmlElement ParseModelToXml()
+        //{
+        //    return base.ParseModelToXml();
+        //}
     }
 
 

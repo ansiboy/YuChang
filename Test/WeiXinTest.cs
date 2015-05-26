@@ -10,8 +10,8 @@ namespace YuChang.Core.Test
     [TestClass]
     public class WeiXinTest
     {
-        const string appid = "wxf1c24c60e3ac13b7";
-        const string secret = "5902b9817acb7a290d4b7c2e6e97d4d3";
+        const string appid = "wxf0bb634c8352c4f3";
+        const string secret = "e6ce53f5054c4d6c0dacd2360996a98b";
 
         //const string appid = "wxd7066d4e88335b68";
         //const string secret = "9eae7d11cac7c612f05a672d2f8919e7";
@@ -27,10 +27,10 @@ namespace YuChang.Core.Test
         [TestMethod]
         public void tokenTest()
         {
-            var token1 = WeiXin.token(appid, secret);
+            var token1 = weixin.token(appid, secret);
             Assert.IsNotNull(token1);
 
-            var token2 = WeiXin.token(appid, secret);
+            var token2 = weixin.token(appid, secret);
             Assert.IsNotNull(token2);
 
             Assert.AreEqual(token1, token2);
@@ -48,8 +48,8 @@ namespace YuChang.Core.Test
         [TestMethod]
         public void getcallbackip()
         {
-            var token = WeiXin.token(appid, secret);
-            var ips = WeiXin.getcallbackip(token);
+            var token = weixin.token(appid, secret);
+            var ips = weixin.getcallbackip(token);
             Assert.IsNotNull(ips);
         }
 
@@ -75,15 +75,15 @@ namespace YuChang.Core.Test
             };
             var buttons = new Button[] { btn1, btn2 };
             //weixin.menu.create(buttons);
-            var token = WeiXin.token(appid, secret);
-            WeiXin.menu.create(token, buttons);
+            var token = weixin.token(appid, secret);
+            weixin.menu.create(token, buttons);
         }
 
         [TestMethod]
         public void menuGet()
         {
-            var token = WeiXin.token(appid, secret);
-            var buttons = WeiXin.menu.get(token);
+            var token = weixin.token(appid, secret);
+            var buttons = weixin.menu.get(token);
             Assert.IsNotNull(buttons);
             Assert.IsTrue(buttons.Length > 0);
         }
@@ -91,9 +91,38 @@ namespace YuChang.Core.Test
         [TestMethod]
         public void menuDelete()
         {
-            var token = WeiXin.token(appid, secret);
-            WeiXin.menu.delete(token);
+            var token = weixin.token(appid, secret);
+            weixin.menu.delete(token);
 
+        }
+
+        [TestMethod]
+        public void Temp()
+        {
+            var token = weixin.token(appid, secret);
+            var result = weixin.user.get(token, "");
+            Console.WriteLine(result.data.openid[0]);
+
+            var prepayId = mch.pay.unifiedorder(appid, "1236045602", result.data.openid[0], "a312b8e09667d4b9c25fae66c5822d6e",
+                                  "body", "http://www.163.com", "11111111111", 22222);
+        }
+
+        [TestMethod]
+        public void qrcode_create()
+        {
+            var token = weixin.token(appid, secret);
+            var result = weixin.qrcode.create(token, ActionName.QR_LIMIT_SCENE, 0);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ticket);
+            Assert.IsNotNull(result.url);
+        }
+
+        [TestMethod]
+        public void ticket_getticket()
+        {
+            var token = weixin.token(appid, secret);
+            var result = weixin.ticket.getticket(token);
+            Assert.AreEqual(0, result.errcode);
         }
     }
 }

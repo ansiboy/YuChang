@@ -63,9 +63,9 @@ namespace YuChang.Core
 
     public class UserManager
     {
-        private AccessToken accessToken;
+        private access_token accessToken;
 
-        public UserManager(AccessToken accessToken)
+        public UserManager(access_token accessToken)
         {
             this.accessToken = accessToken;
         }

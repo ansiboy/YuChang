@@ -17,9 +17,9 @@ namespace YuChang.Core
 
     public class MediaManager
     {
-        private AccessToken accessToken;
+        private access_token accessToken;
 
-        public MediaManager(AccessToken accessToken)
+        public MediaManager(access_token accessToken)
         {
             this.accessToken = accessToken;
         }

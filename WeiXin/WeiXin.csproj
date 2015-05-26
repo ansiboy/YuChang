@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>YuChang.Core</RootNamespace>
-    <AssemblyName>YuChang.Core</AssemblyName>
+    <AssemblyName>YuChang.Core2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -48,8 +48,8 @@
     <Compile Include="AccessToken.cs" />
     <Compile Include="AccessTokenPool.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="CustomMenu.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="mch.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="MessageProcesser.cs" />
     <Compile Include="Models\Article.cs" />
@@ -61,6 +61,7 @@
     <Compile Include="Models\LinkMessage.cs" />
     <Compile Include="Models\LocationMessage.cs" />
     <Compile Include="Models\MusicMessage.cs" />
+    <Compile Include="Models\NormalMessage.cs" />
     <Compile Include="Models\PostMessage.cs" />
     <Compile Include="Models\MessageType.cs" />
     <Compile Include="Models\Template.cs" />
@@ -69,7 +70,6 @@
     <Compile Include="Models\TransferCustomerServiceMessage.cs" />
     <Compile Include="Models\UndetectedMessage.cs" />
     <Compile Include="Models\UnsubscribeEvent.cs" />
-    <Compile Include="PayManager.cs" />
     <Compile Include="PromoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\VideoMessage.cs" />

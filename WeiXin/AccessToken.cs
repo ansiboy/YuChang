@@ -8,20 +8,20 @@ namespace YuChang.Core
     /// <summary>
     /// 将微信接口中的accessToken封装为对象，并且能自动进行继约。
     /// </summary>
-    public class AccessToken
+    public class access_token
     {
         private string appid;
         private string secret;
         private string token;
         private int expiresIn;
         private DateTime createDateTime;
-
+        
         /// <summary>
         /// AccessToken 的构造函数
         /// </summary>
         /// <param name="appid">公众号的应用ID</param>
         /// <param name="secret">公众号的应用密钥</param>
-        public AccessToken(string appid, string secret)
+        internal access_token(string appid, string secret)
         {
             this.appid = appid;
             this.secret = secret;
