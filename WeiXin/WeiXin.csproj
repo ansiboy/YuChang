@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>YuChang.Core</RootNamespace>
-    <AssemblyName>YuChang.Core2</AssemblyName>
+    <AssemblyName>YuChang.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -75,14 +75,12 @@
     <Compile Include="Models\VideoMessage.cs" />
     <Compile Include="Models\VoiceMessage.cs" />
     <Compile Include="ShoppingManager.cs" />
-    <Compile Include="TemplateManager.cs" />
     <Compile Include="tenpayLib\Error.cs" />
     <Compile Include="tenpayLib\MD5Util.cs" />
     <Compile Include="tenpayLib\RequestHandler.cs" />
     <Compile Include="tenpayLib\ResponseHandler.cs" />
     <Compile Include="tenpayLib\SHA1Util.cs" />
     <Compile Include="tenpayLib\TenpayUtil.cs" />
-    <Compile Include="TicketGenerator.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="weixin.cs" />
