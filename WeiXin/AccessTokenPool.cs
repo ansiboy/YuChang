@@ -4,17 +4,17 @@ namespace YuChang.Core
 {
     public static class AccessTokenPool
     {
-        private static Dictionary<string, List<access_token>> dic_accessTokens
-            = new Dictionary<string, List<access_token>>();
+        private static Dictionary<string, List<AccessToken>> dic_accessTokens
+            = new Dictionary<string, List<AccessToken>>();
 
         private static Dictionary<string, string> secrets = new Dictionary<string, string>();
 
-        public static access_token GetAccessToken(string appid, string secret)
+        public static AccessToken GetAccessToken(string appid, string secret)
         {
-            List<access_token> accessTokens;
+            List<AccessToken> accessTokens;
             if (dic_accessTokens.TryGetValue(appid, out accessTokens) == false)
             {
-                dic_accessTokens[appid] = accessTokens = new List<access_token>();
+                dic_accessTokens[appid] = accessTokens = new List<AccessToken>();
             }
 
             string old_secret;
@@ -24,9 +24,9 @@ namespace YuChang.Core
             }
 
             if (old_secret != secret)
-                dic_accessTokens[appid] = new List<access_token>();
+                dic_accessTokens[appid] = new List<AccessToken>();
 
-            access_token result;
+            AccessToken result;
             for (int i = 0; i < accessTokens.Count; i++)
             {
                 if (!accessTokens[i].IsUsing)
@@ -43,7 +43,7 @@ namespace YuChang.Core
             //{
             //    throw Error.AppSecretRequired();
             //}
-            access_token accessToken = new access_token(appid, secret);
+            AccessToken accessToken = new AccessToken(appid, secret);
             accessTokens.Add(accessToken);
             result = accessToken;
             return result;

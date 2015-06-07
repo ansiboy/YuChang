@@ -11,7 +11,7 @@ namespace YuChang.Core
     /// </summary>
     public class MessageProcesser
     {
-        public Message Process(string xml)
+        public string Process(string xml)
         {
             var msg = Message.FromXml(xml);
             switch (msg.MsgType)
@@ -49,75 +49,75 @@ namespace YuChang.Core
                 case Models.MessageType.Voice:
                     return ProcessVoiceMessage((VoiceMessage)msg);
             }
-            return null;
+            return string.Empty;
         }
 
-        private Message ProcessTemplateSendJobFinishEvent(TemplateSendJobFinishEvent msg)
+        private string ProcessTemplateSendJobFinishEvent(TemplateSendJobFinishEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessViewEvent(ViewEvent msg)
+        protected virtual string ProcessViewEvent(ViewEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessClickEvent(ClickEvent msg)
+        protected virtual string ProcessClickEvent(ClickEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessLocationEvent(LocationEvent msg)
+        protected virtual string ProcessLocationEvent(LocationEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessScanEvent(ScanEvent msg)
+        protected virtual string ProcessScanEvent(ScanEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessSubscribeEvent(SubscribeEvent msg)
+        protected virtual string ProcessSubscribeEvent(SubscribeEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessUnsubscribeEvent(UnsubscribeEvent msg)
+        protected virtual string ProcessUnsubscribeEvent(UnsubscribeEvent msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessImageMessage(ImageMessage msg)
+        protected virtual string ProcessImageMessage(ImageMessage msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessLinkMessage(LinkMessage msg)
+        protected virtual string ProcessLinkMessage(LinkMessage msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessLocationMessage(LocationMessage msg)
+        protected virtual string ProcessLocationMessage(LocationMessage msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessTextMessage(TextMessage msg)
+        protected virtual string ProcessTextMessage(TextMessage msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessVideoMessage(VideoMessage msg)
+        protected virtual string ProcessVideoMessage(VideoMessage msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message ProcessVoiceMessage(VoiceMessage msg)
+        protected virtual string ProcessVoiceMessage(VoiceMessage msg)
         {
             return DefaultProcess(msg);
         }
 
-        protected virtual Message DefaultProcess(Message msg)
+        protected virtual string DefaultProcess(Message msg)
         {
             var reply = new TextMessage();
             reply.ToUserName = msg.FromUserName;
@@ -130,7 +130,7 @@ namespace YuChang.Core
             {
                 reply.Content = string.Format("{0} message is not processed.", msg.MsgType);
             }
-            return reply;
+            return reply.ToXml();
         }
 
 
