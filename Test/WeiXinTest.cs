@@ -123,6 +123,14 @@ namespace YuChang.Core.Test
             var token = weixin.token(appid, secret);
             var result = weixin.ticket.getticket(token);
             Assert.AreEqual(0, result.errcode);
+
+            //weixin.message.template.send()
         }
+
+        //public void t()
+        //{
+        //    var token = weixin.token(appid, secret);
+        //    weixin.message.template.send(token,"","")
+        //}
     }
 }

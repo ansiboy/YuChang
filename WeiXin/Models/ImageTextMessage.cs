@@ -19,6 +19,7 @@ namespace YuChang.Core.Models
             get;
             private set;
         }
+
         public ImageTextMessage()
             : base(MessageType.News)
         {

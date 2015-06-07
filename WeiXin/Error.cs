@@ -5,7 +5,7 @@ using System.Text;
 
 namespace YuChang.Core
 {
-    public class WeiXinException : Exception
+    internal class WeiXinException : Exception
     {
         public WeiXinException(int code, string msg)
             : base(code + ":" + msg)

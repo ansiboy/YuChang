@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace YuChang.Core
 {
-    public static class AccessTokenPool
+    internal static class AccessTokenPool
     {
         private static Dictionary<string, List<access_token>> dic_accessTokens
             = new Dictionary<string, List<access_token>>();

@@ -229,13 +229,18 @@ namespace YuChang.Test
         [TestMethod]
         public void ConvertMusicTest()
         {
-            var img_text = new MusicMessage()
+            var music_msg = new MusicMessage()
             {
                 CreateTime = DateTime.Now,
-                Description = "description",
-                HQMusicUrl = "URL",
-                MusicURL = "URL",
+                // Music. Description = "description",
+                //Music.HQMusicUrl = "URL",
+                //Music.MusicURL = "URL",
             };
+
+            music_msg.Music.Description = "descriiption";
+            music_msg.Music.HQMusicUrl = "url";
+            music_msg.Music.MusicUrl = "url";
+
             //img_text.CreateTime = DateTime.Now;
             //img_text..Add(new Article
             //{
@@ -245,7 +250,9 @@ namespace YuChang.Test
             //    Url = "url"
             //});
 
-            var xml = img_text.ToXml();
+
+
+            var xml = music_msg.ToXml();
 
         }
 

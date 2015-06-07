@@ -10,30 +10,21 @@ namespace YuChang.Core.Models
         private List<TemplateField> fields;
         const string DEFAULT_TOP_COLOR = "#4D6082";
 
-        public Template(string templateId, string toUser, string topColor = null)
+        public Template(string templateId, string topColor = null)
         {
             if (string.IsNullOrEmpty(templateId))
                 throw Error.ArugmentNull("templateId");
-
-            if (string.IsNullOrEmpty(toUser))
-                throw Error.ArugmentNull("toUser");
 
             if (string.IsNullOrEmpty(topColor))
                 topColor = DEFAULT_TOP_COLOR;
 
             this.TemplateId = templateId;
-            this.ToUser = toUser;
             this.TopColor = topColor;
-            this.Url = "";
 
             this.fields = new List<TemplateField>();
         }
 
         public string TemplateId { get; set; }
-
-        public string ToUser { get; set; }
-
-        public string Url { get; set; }
 
         public string TopColor { get; set; }
 

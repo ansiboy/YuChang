@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Text;
+using YuChang.Core.Models;
 
 namespace YuChang.Core
 {
@@ -281,11 +282,66 @@ namespace YuChang.Core
 
             public static class template
             {
-                public static string send(access_token token, string touser, string template_id, string url, string topcolor, object data)
+                /// <summary>
+                /// 发送模板消息
+                /// </summary>
+                /// <param name="token"></param>
+                /// <param name="touser">接收模板消息的用户的openid</param>
+                /// <param name="template">模版消息对象</param>
+                /// <param name="url">模版消息的链接</param>
+                /// <returns></returns>
+                public static string send(access_token token, string touser, Template template, string url = null)
                 {
+                    if (token == null)
+                        throw Error.ArugmentNull("token");
+
+                    if (string.IsNullOrEmpty(touser))
+                        throw Error.ArugmentNull("touser");
+
+                    if (template == null)
+                        throw Error.ArugmentNull("template");
+
+                    if (url == null)
+                        url = "";
+
+                    var template_id = template.TemplateId;
+                    var topcolor = template.TopColor;
+
+                    var data = new Dictionary<string, object>();
+                    foreach (var field in template.Fields)
+                    {
+                        var item = new Dictionary<string, string>();
+                        item["value"] = field.Value;
+                        item["color"] = field.Color;
+
+                        data[field.Name] = item;
+                    }
+
                     var path = "message/template/send?access_token=" + token;
                     var obj = Call(path, new { errcode = "", errmsg = "", msgid = "" }, new { touser, template_id, url, topcolor, data });
                     return obj.msgid;
+                }
+
+                string ConvertTemplateToJson(Template template)
+                {
+                    var dic = new Dictionary<string, object>();
+                    dic["template_id"] = template.TemplateId;
+                    dic["topcolor"] = template.TopColor;
+
+                    var data = new Dictionary<string, object>();
+                    dic["data"] = data;
+
+                    foreach (var field in template.Fields)
+                    {
+                        var item = new Dictionary<string, string>();
+                        item["value"] = field.Value;
+                        item["color"] = field.Color;
+
+                        data[field.Name] = item;
+                    }
+
+                    var text = Utility.Serialize(dic);
+                    return text;
                 }
             }
 

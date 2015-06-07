@@ -2,36 +2,59 @@
 using System.Xml;
 namespace YuChang.Core.Models
 {
+    public class Music
+    {
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public string MusicUrl { get; set; }
+
+        public string HQMusicUrl { get; set; }
+
+        public string ThumbMediaId { get; set; }
+    }
+
     public class MusicMessage : NormalMessage
     {
-        public string Title
-        {
-            get;
-            set;
-        }
-        public string Description
-        {
-            get;
-            set;
-        }
-        public string MusicURL
-        {
-            get;
-            set;
-        }
-        public string HQMusicUrl
-        {
-            get;
-            set;
-        }
-        public string ThumbMediaId
-        {
-            get;
-            set;
-        }
+        #region MyRegion
+        //public string Title
+        //{
+        //    get;
+        //    set;
+        //}
+        //public string Description
+        //{
+        //    get;
+        //    set;
+        //}
+        //public string MusicURL
+        //{
+        //    get;
+        //    set;
+        //}
+        //public string HQMusicUrl
+        //{
+        //    get;
+        //    set;
+        //}
+        //public string ThumbMediaId
+        //{
+        //    get;
+        //    set;
+        //} 
+        #endregion
+
         public MusicMessage()
             : base(MessageType.Music)
         {
+            this.Music = new Music();
+        }
+
+        public Music Music
+        {
+            get;
+            private set;
         }
 
         public override string ToXml()
@@ -59,21 +82,21 @@ namespace YuChang.Core.Models
             XmlNode xmlNode5 = xmlDocument.CreateNode(XmlNodeType.Element, "Music", null);
             xmlElement.AppendChild(xmlNode5);
             XmlNode xmlNode6 = xmlDocument.CreateNode(XmlNodeType.Element, "Title", null);
-            xmlNode6.InnerText = this.Title;
+            xmlNode6.InnerText = this.Music.Title;
             xmlNode5.AppendChild(xmlNode6);
             XmlNode xmlNode7 = xmlDocument.CreateNode(XmlNodeType.Element, "Description", null);
-            xmlNode7.InnerText = this.Description;
+            xmlNode7.InnerText = this.Music.Description;
             xmlNode5.AppendChild(xmlNode7);
             XmlNode xmlNode8 = xmlDocument.CreateNode(XmlNodeType.Element, "MusicURL", null);
-            xmlNode8.InnerText = this.MusicURL;
+            xmlNode8.InnerText = this.Music.MusicUrl;
             xmlNode5.AppendChild(xmlNode8);
             XmlNode xmlNode9 = xmlDocument.CreateNode(XmlNodeType.Element, "HQMusicUrl", null);
-            xmlNode9.InnerText = this.HQMusicUrl;
+            xmlNode9.InnerText = this.Music.HQMusicUrl;
             xmlNode5.AppendChild(xmlNode9);
-            if (!string.IsNullOrEmpty(this.ThumbMediaId))
+            if (!string.IsNullOrEmpty(this.Music.ThumbMediaId))
             {
                 XmlNode xmlNode10 = xmlDocument.CreateNode(XmlNodeType.Element, "ThumbMediaId", null);
-                xmlNode10.InnerText = this.ThumbMediaId;
+                xmlNode10.InnerText = this.Music.ThumbMediaId;
                 xmlNode5.AppendChild(xmlNode10);
             }
             return xmlElement;

@@ -8,7 +8,7 @@ namespace YuChang.Core
 {
 
 
-    public class TemplateManager
+    internal class TemplateManager
     {
         private access_token accessToken;
 
