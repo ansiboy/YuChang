@@ -7,8 +7,8 @@ namespace YuChang.Core
 {
     public class PromoteService
     {
-        private access_token accessToken;
-        public PromoteService(access_token accessToken)
+        private AccessToken accessToken;
+        public PromoteService(AccessToken accessToken)
         {
             this.accessToken = accessToken;
         }

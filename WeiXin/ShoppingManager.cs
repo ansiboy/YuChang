@@ -11,17 +11,17 @@ namespace YuChang.Core
 {
     public class ShoppingManager
     {
-        private access_token accessToken;
+        private AccessToken accessToken;
         private string appKey;
 
-        public ShoppingManager(access_token accessToken, string appKey)
+        public ShoppingManager(AccessToken accessToken, string appKey)
         {
             this.accessToken = accessToken;
             this.appKey = appKey;
         }
 
         public ShoppingManager(string appid, string secret, string appKey)
-            : this(new access_token(appid, secret), appKey)
+            : this(new AccessToken(appid, secret), appKey)
         {
 
         }

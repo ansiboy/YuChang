@@ -151,12 +151,12 @@ namespace YuChang.Core
 
         }
 
-        public static access_token token(string appid, string secret)
+        public static AccessToken token(string appid, string secret)
         {
             return AccessTokenPool.GetAccessToken(appid, secret);
         }
 
-        public static string[] getcallbackip(access_token token)
+        public static string[] getcallbackip(AccessToken token)
         {
             var path = "getcallbackip?access_token=" + token;
             var result = Call(path, new { ip_list = new string[] { } });
@@ -167,20 +167,20 @@ namespace YuChang.Core
 
         public static class menu
         {
-            public static void create(access_token token, Button[] button)
+            public static void create(AccessToken token, Button[] button)
             {
                 var url = string.Format("menu/create?access_token={0}", token);
                 weixin.Call(url, new { errcode = "" }, new { button });
             }
 
-            public static Button[] get(access_token token)
+            public static Button[] get(AccessToken token)
             {
                 var url = "menu/get?access_token=" + token;
                 var result = weixin.Call(url, new { menu = new { button = new Button[] { } } });
                 return result.menu.button;
             }
 
-            public static void delete(access_token token)
+            public static void delete(AccessToken token)
             {
                 var url = "menu/delete?access_token=" + token;
                 weixin.Call(url, new { errcode = "" });
@@ -202,7 +202,7 @@ namespace YuChang.Core
                 public string url;
             }
 
-            public static CreateResult create(access_token token, ActionName action_name, int scene_id)
+            public static CreateResult create(AccessToken token, ActionName action_name, int scene_id)
             {
                 var path = "qrcode/create?access_token=" + token;
                 object data;
@@ -237,13 +237,13 @@ namespace YuChang.Core
 
         public static class template
         {
-            public static void api_set_industry(access_token token, string industry_id1, string industry_id2)
+            public static void api_set_industry(AccessToken token, string industry_id1, string industry_id2)
             {
                 var url = "template/api_set_industry?access_token=" + token;
                 Call(url, new { errcode = "" }, new { industry_id1, industry_id2 });
             }
 
-            public static string api_add_template(access_token token, string template_id_short)
+            public static string api_add_template(AccessToken token, string template_id_short)
             {
                 var url = "message/template/send?access_token=" + token;
                 var obj = Call(url, new { errcode = "", template_id = "" });
@@ -261,7 +261,7 @@ namespace YuChang.Core
                 public int expires_in;
             }
 
-            public static getticket_result getticket(access_token token)
+            public static getticket_result getticket(AccessToken token)
             {
                 var url = "ticket/getticket?type=wx_card&access_token=" + token;
                 return Call(url, new getticket_result());
@@ -281,7 +281,7 @@ namespace YuChang.Core
 
             public static class template
             {
-                public static string send(access_token token, string touser, string template_id, string url, string topcolor, object data)
+                public static string send(AccessToken token, string touser, string template_id, string url, string topcolor, object data)
                 {
                     var path = "message/template/send?access_token=" + token;
                     var obj = Call(path, new { errcode = "", errmsg = "", msgid = "" }, new { touser, template_id, url, topcolor, data });
@@ -294,7 +294,7 @@ namespace YuChang.Core
                 /// <summary>
                 /// 根据分组进行群发【订阅号与服务号认证后均可用】
                 /// </summary>
-                public static string sendall(access_token token, string mediaIdOrContent, MessageType msgtype, string group_id)
+                public static string sendall(AccessToken token, string mediaIdOrContent, MessageType msgtype, string group_id)
                 {
                     object filter;
                     if (!string.IsNullOrEmpty(group_id))
@@ -359,7 +359,7 @@ namespace YuChang.Core
                 /// <summary>
                 /// 根据OpenID列表群发【订阅号不可用，服务号认证后可用】
                 /// </summary>
-                public static string send(access_token token, string mediaIdOrContent, MessageType msgtype, string[] touser)
+                public static string send(AccessToken token, string mediaIdOrContent, MessageType msgtype, string[] touser)
                 {
                     if (string.IsNullOrEmpty(mediaIdOrContent))
                         throw Error.ArugmentNull("mediaIdOrContent");
@@ -427,7 +427,7 @@ namespace YuChang.Core
                 /// 删除群发【订阅号与服务号认证后均可用】
                 /// </summary>
                 /// <param name="msg_Id"></param>
-                public static void delete(access_token token, string msg_Id)
+                public static void delete(AccessToken token, string msg_Id)
                 {
                     var url = "message/mass/send?access_token=" + token;
                     Call(url, new { errorcode = "", errmsg = "" });
@@ -436,7 +436,7 @@ namespace YuChang.Core
                 /// <summary>
                 /// 预览接口【订阅号与服务号认证后均可用】
                 /// </summary>
-                public static void preview(access_token token, string touser, string mediaIdOrContent, MessageType msgtype)
+                public static void preview(AccessToken token, string touser, string mediaIdOrContent, MessageType msgtype)
                 {
                     var url = "message/mass/preview?access_token=" + token;
                     var obj_result = new { errcode = "", errmsg = "", msg_id = "" };
@@ -468,7 +468,7 @@ namespace YuChang.Core
                 /// </summary>
                 /// <param name="msg_id">群发消息后返回的消息id</param>
                 /// <returns>消息发送后的状态，SEND_SUCCESS表示发送成功</returns>
-                public static string get(access_token token, string msg_id)
+                public static string get(AccessToken token, string msg_id)
                 {
                     var url = "message/mass/get?access_token=" + token;
                     var result = new { msg_status = "" };
@@ -521,7 +521,7 @@ namespace YuChang.Core
 
 
 
-            public static UploadResult uploadnews(access_token token, Article[] articles)
+            public static UploadResult uploadnews(AccessToken token, Article[] articles)
             {
                 if (articles == null)
                     throw Error.ArugmentNull("articles");
@@ -547,7 +547,7 @@ namespace YuChang.Core
             /// <param name="type">媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）</param>
             /// <param name="uploadFilePath">要上传的文件路径</param>
             /// <returns></returns>
-            public static UploadResult upload(access_token access_token, MediaType type, string uploadFilePath)
+            public static UploadResult upload(AccessToken access_token, MediaType type, string uploadFilePath)
             {
                 var url = string.Format("http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", access_token, type);
                 var webClient = new WebClient();
@@ -564,7 +564,7 @@ namespace YuChang.Core
             /// <param name="access_token">调用接口凭证</param>
             /// <param name="media_id">媒体文件ID</param>
             /// <param name="saveFilePath">要保存的文件路径</param>
-            public static void get(access_token access_token, string media_id, string saveFilePath)
+            public static void get(AccessToken access_token, string media_id, string saveFilePath)
             {
                 var url = string.Format("media/get?access_token={0}&media_id={1}", access_token, media_id);
                 var webClient = new WebClient();
@@ -581,7 +581,7 @@ namespace YuChang.Core
             /// <param name="access_token">调用接口凭证</param>
             /// <param name="articles">图文素材</param>
             /// <returns>媒体文件ID</returns>
-            public static string add_news(access_token access_token, Article[] articles)
+            public static string add_news(AccessToken access_token, Article[] articles)
             {
                 var url = "material/add_news?access_token=" + access_token;
                 var result = new { media_id = "" };
@@ -589,7 +589,7 @@ namespace YuChang.Core
                 return result.media_id;
             }
 
-            public static string add_material(access_token access_token, MediaType type, string uploadFilePath)
+            public static string add_material(AccessToken access_token, MediaType type, string uploadFilePath)
             {
                 var url = "material/add_material?access_token=" + access_token;
                 //var url = string.Format("http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", access_token, type);
@@ -619,7 +619,7 @@ namespace YuChang.Core
                 public string next_openid;
             }
 
-            public static UserGetResult get(access_token token, string next_openid)
+            public static UserGetResult get(AccessToken token, string next_openid)
             {
                 var url = string.Format("user/get?access_token={0}&next_openid={1}", token, next_openid);
                 var json = weixin.GetJson(url);
