@@ -132,5 +132,17 @@ namespace YuChang.Core.Test
         //    var token = weixin.token(appid, secret);
         //    weixin.message.template.send(token,"","")
         //}
+
+        [TestMethod]
+        public void user_info()
+        {
+            var token = weixin.token(appid, secret);
+            var get_result = weixin.user.get(token);
+
+            var openid = get_result.data.openid.First();
+
+            var result = weixin.user.info(token, openid);
+            Assert.IsNotNull(result);  
+        }
     }
 }

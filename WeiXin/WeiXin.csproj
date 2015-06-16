@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\CompanyProjects\PuGongYing\ManageCenter\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,38 +52,36 @@
     <Compile Include="mch.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="MessageProcesser.cs" />
-    <Compile Include="Models\Article.cs" />
-    <Compile Include="Models\Button.cs" />
-    <Compile Include="Models\EventMessage.cs" />
-    <Compile Include="Models\EventType.cs" />
-    <Compile Include="Models\ImageMessage.cs" />
-    <Compile Include="Models\ImageTextMessage.cs" />
-    <Compile Include="Models\LinkMessage.cs" />
-    <Compile Include="Models\LocationMessage.cs" />
-    <Compile Include="Models\MusicMessage.cs" />
-    <Compile Include="Models\NormalMessage.cs" />
-    <Compile Include="Models\PostMessage.cs" />
-    <Compile Include="Models\MessageType.cs" />
-    <Compile Include="Models\Template.cs" />
-    <Compile Include="Models\TemplateSendJobFinishEvent.cs" />
-    <Compile Include="Models\TextMessage.cs" />
-    <Compile Include="Models\TransferCustomerServiceMessage.cs" />
-    <Compile Include="Models\UndetectedMessage.cs" />
-    <Compile Include="Models\UnsubscribeEvent.cs" />
+    <Compile Include="Messages\Article.cs" />
+    <Compile Include="Messages\EventMessage.cs" />
+    <Compile Include="Messages\EventType.cs" />
+    <Compile Include="Messages\ImageMessage.cs" />
+    <Compile Include="Messages\ImageTextMessage.cs" />
+    <Compile Include="Messages\LinkMessage.cs" />
+    <Compile Include="Messages\LocationMessage.cs" />
+    <Compile Include="Messages\MusicMessage.cs" />
+    <Compile Include="Messages\NormalMessage.cs" />
+    <Compile Include="Messages\PostMessage.cs" />
+    <Compile Include="Messages\MessageType.cs" />
+    <Compile Include="Messages\Template.cs" />
+    <Compile Include="Messages\TextMessage.cs" />
+    <Compile Include="Messages\UndetectedMessage.cs" />
+    <Compile Include="Messages\UnsubscribeEvent.cs" />
     <Compile Include="PromoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\VideoMessage.cs" />
-    <Compile Include="Models\VoiceMessage.cs" />
-    <Compile Include="ShoppingManager.cs" />
+    <Compile Include="Messages\VideoMessage.cs" />
+    <Compile Include="Messages\VoiceMessage.cs" />
     <Compile Include="tenpayLib\Error.cs" />
     <Compile Include="tenpayLib\MD5Util.cs" />
     <Compile Include="tenpayLib\RequestHandler.cs" />
     <Compile Include="tenpayLib\ResponseHandler.cs" />
     <Compile Include="tenpayLib\SHA1Util.cs" />
     <Compile Include="tenpayLib\TenpayUtil.cs" />
-    <Compile Include="UserManager.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="weixin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

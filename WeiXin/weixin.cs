@@ -644,7 +644,7 @@ namespace YuChang.Core
                 public string[] openid;
             }
 
-            public class UserGetResult
+            public class GetResult
             {
                 public int total;
                 public int count;
@@ -652,13 +652,42 @@ namespace YuChang.Core
                 public string next_openid;
             }
 
-            public static UserGetResult get(AccessToken token, string next_openid)
+            public static GetResult get(AccessToken token, string next_openid = null)
             {
                 var url = string.Format("user/get?access_token={0}&next_openid={1}", token, next_openid);
                 var json = weixin.GetJson(url);
-                var result = new UserGetResult();
+                var result = new GetResult();
                 result = Deserialize(json, result);
                 return result;
+            }
+
+            public class InfoResult
+            {
+                public string OpenId { get; set; }
+
+                public string NickName { get; set; }
+
+                public int Sex { get; set; }
+
+                public string City { get; set; }
+
+                public string Country { get; set; }
+
+                public string Province { get; set; }
+
+                public string Language { get; set; }
+
+                public string HeadImgUrl { get; set; }
+
+                public string SubscribeTime { get; set; }
+            }
+
+            public static InfoResult info(AccessToken token, string userOpenId)
+            {
+                var url = string.Format("user/info?access_token={0}&openid={1}&lang=zh_CN", token, userOpenId);
+                var json = weixin.GetJson(url);
+                var info_result = new InfoResult();
+                return Deserialize(json, info_result);
             }
         }
 
