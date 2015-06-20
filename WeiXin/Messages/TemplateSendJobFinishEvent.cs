@@ -1,5 +1,6 @@
 ﻿using System;
-namespace YuChang.Core.Models
+
+namespace YuChang.Core.Messages
 {
     public class TemplateSendJobFinishEvent : EventMessage
     {

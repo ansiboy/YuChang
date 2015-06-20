@@ -63,7 +63,8 @@
     <Compile Include="Messages\NormalMessage.cs" />
     <Compile Include="Messages\PostMessage.cs" />
     <Compile Include="Messages\MessageType.cs" />
-    <Compile Include="Messages\Template.cs" />
+    <Compile Include="Template.cs" />
+    <Compile Include="Messages\TemplateSendJobFinishEvent.cs" />
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Messages\UndetectedMessage.cs" />
     <Compile Include="Messages\UnsubscribeEvent.cs" />

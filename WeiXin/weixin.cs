@@ -6,7 +6,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Text;
-using YuChang.Core.Models;
 
 namespace YuChang.Core
 {
