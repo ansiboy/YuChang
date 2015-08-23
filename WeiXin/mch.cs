@@ -45,24 +45,25 @@ namespace YuChang.Core
                 string innerText = source.Single((XmlElement o) => o.Name == "return_code").InnerText;
                 if (!(innerText != "SUCCESS"))
                 {
-                    return source.Single((XmlElement o) => o.Name == "prepay_id").InnerText;
+                    var prepay_id_element = source.SingleOrDefault((XmlElement o) => o.Name == "prepay_id");
+                    if (prepay_id_element != null)
+                        return prepay_id_element.InnerText;
+
                 }
-                string text2 = (
-                    from o in source
-                    where o.Name == "err_code"
-                    select o.InnerText).SingleOrDefault<string>();
-                string text3 = (
-                    from o in source
-                    where o.Name == "err_code_des"
-                    select o.InnerText).SingleOrDefault<string>();
-                if (text2 != null && text3 != null)
-                {
-                    throw Error.WeiXinError(text2, text3);
-                }
-                string msg = (
-                    from o in source
-                    where o.Name == "return_msg"
-                    select o.InnerText).SingleOrDefault<string>() ?? "ERROR";
+
+                var err_code = source.Where(o => o.Name == "err_code").Select(o => o.InnerText).SingleOrDefault();
+                var err_code_des = source.Where(o => o.Name == "err_code_des").Select(o => o.InnerText).SingleOrDefault();
+
+                if (err_code != null && err_code_des != null)
+                    throw Error.WeiXinError(err_code, err_code_des);
+
+                //string msg = (
+                //    from o in source
+                //    where o.Name == "return_msg"
+                //    select o.InnerText).SingleOrDefault<string>() ?? "ERROR";
+
+                var msg = source.Where(o => o.Name == "return_msg").Select(o => o.InnerText).SingleOrDefault() ?? "ERROR";
+
                 throw Error.WeiXinError(innerText, msg);
             }
         }

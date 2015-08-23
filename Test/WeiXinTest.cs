@@ -99,12 +99,20 @@ namespace YuChang.Core.Test
         [TestMethod]
         public void Temp()
         {
-            var token = weixin.token(appid, secret);
-            var result = weixin.user.get(token, "");
-            Console.WriteLine(result.data.openid[0]);
+            //var token = weixin.token(appid, secret);
+            //var result = weixin.user.get(token, "");
+            //Console.WriteLine(result.data.openid[0]);
 
-            var prepayId = mch.pay.unifiedorder(appid, "1236045602", result.data.openid[0], "a312b8e09667d4b9c25fae66c5822d6e",
-                                  "body", "http://www.163.com", "11111111111", 22222);
+            var appid = "wxf0bb634c8352c4f3";
+            var mch_id = "1236045602";
+            var openid = "oOjaNt3AnqTEvVPIbKuTqjnZwohA";
+            var key = "a312b8e09667d4b9c25fae66c5822d6e";
+            var body = "零食有约";
+            var notify_url = "http://temp.alinq.cn/UserServices/WeiXin/OrderPurchase";
+            var out_trade_no = "2823aa2eac894501af74e85430077cea";
+            var total_fee = 2;
+            var prepayId = mch.pay.unifiedorder(appid, mch_id, openid, key,
+                                  body, notify_url, out_trade_no, total_fee);
         }
 
         [TestMethod]
@@ -132,5 +140,7 @@ namespace YuChang.Core.Test
         //    var token = weixin.token(appid, secret);
         //    weixin.message.template.send(token,"","")
         //}
+
+
     }
 }
