@@ -47,6 +47,12 @@ namespace YuChang.Core
         public Button[] sub_button;
     }
 
+    public enum TicketType
+    {
+        wx_card,
+        jsapi
+    }
+
     public static class weixin
     {
         static Encoding DefaultEncoding = Encoding.UTF8;
@@ -262,9 +268,11 @@ namespace YuChang.Core
                 public int expires_in;
             }
 
-            public static getticket_result getticket(AccessToken token)
+
+
+            public static getticket_result getticket(AccessToken token, TicketType type)
             {
-                var url = "ticket/getticket?type=wx_card&access_token=" + token;
+                var url = string.Format("ticket/getticket?access_token={0}&type={1}", token, type);
                 return Call(url, new getticket_result());
             }
         }
