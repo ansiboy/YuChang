@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
-using YuChang.Core.Models;
+using YuChang.Core.Messages;
 
 namespace YuChang.Test
 {

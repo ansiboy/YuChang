@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
-using YuChang.Core.Models;
 using System.Data.SqlClient;
 using YuChang.Core;
+using YuChang.Core.Messages;
 
 namespace YuChang.Test
 {
@@ -185,6 +185,7 @@ namespace YuChang.Test
 
             var p = new MessageProcesser();
             p.Process(xml);
+
         }
 
 

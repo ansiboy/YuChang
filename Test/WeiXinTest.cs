@@ -141,6 +141,27 @@ namespace YuChang.Core.Test
         //    weixin.message.template.send(token,"","")
         //}
 
+        [TestMethod]
+        public void user_info()
+        {
+            var token = weixin.token(appid, secret);
+            var get_result = weixin.user.get(token);
+
+            var openid = get_result.data.openid.First();
+
+            var result = weixin.user.info(token, openid);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Test()
+        {
+            var appid = "wxf0bb634c8352c4f3";
+
+            mch.pay.unifiedorder(appid, "1236045602", "oOjaNt51NI4srmUm8FTPkr-ywjc0",
+                "a312b8e09667d4b9c25fae66c5822d6e", "零食有约",
+                "http://shop.alinq.cn/UserServices/WeiXin/WeiXin/OrderPurchase", "9188419b78ca458ea5deb94ff5f3cbf1", 1);
+        }
 
     }
 }

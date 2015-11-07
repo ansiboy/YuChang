@@ -43,7 +43,7 @@ namespace YuChang.Core
                 xmlDocument.LoadXml(xml);
                 XmlElement[] source = xmlDocument.FirstChild.ChildNodes.Cast<XmlElement>().ToArray<XmlElement>();
                 string innerText = source.Single((XmlElement o) => o.Name == "return_code").InnerText;
-                if (!(innerText != "SUCCESS"))
+                if (innerText == "SUCCESS")
                 {
                     var prepay_id_element = source.SingleOrDefault((XmlElement o) => o.Name == "prepay_id");
                     if (prepay_id_element != null)

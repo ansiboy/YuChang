@@ -11,7 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Xml.Linq;
-using YuChang.Core.Models;
+using YuChang.Core.Messages;
 using YuChang.Web.Models;
 
 namespace YuChang.Web

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using YuChang.Core.Models;
+using YuChang.Core.Messages;
 
 namespace YuChang.Core
 {
@@ -16,7 +16,7 @@ namespace YuChang.Core
             var msg = Message.FromXml(xml);
             switch (msg.MsgType)
             {
-                case Models.MessageType.Event:
+                case MessageType.Event:
                     var eventType = ((EventMessage)msg).Event;
                     switch (eventType)
                     {
@@ -36,17 +36,17 @@ namespace YuChang.Core
                             return ProcessTemplateSendJobFinishEvent((TemplateSendJobFinishEvent)msg);
                     }
                     break;
-                case Models.MessageType.Image:
+                case MessageType.Image:
                     return ProcessImageMessage((ImageMessage)msg);
-                case Models.MessageType.Link:
+                case MessageType.Link:
                     return ProcessLinkMessage((LinkMessage)msg);
-                case Models.MessageType.Location:
+                case MessageType.Location:
                     return ProcessLocationMessage((LocationMessage)msg);
-                case Models.MessageType.Text:
+                case MessageType.Text:
                     return ProcessTextMessage((TextMessage)msg);
-                case Models.MessageType.Video:
+                case MessageType.Video:
                     return ProcessVideoMessage((VideoMessage)msg);
-                case Models.MessageType.Voice:
+                case MessageType.Voice:
                     return ProcessVoiceMessage((VoiceMessage)msg);
             }
             return string.Empty;
