@@ -121,7 +121,7 @@ namespace YuChang.Core.Test
         public void ticket_getticket()
         {
             var token = weixin.token(appid, secret);
-            var result = weixin.ticket.getticket(token);
+            var result = weixin.ticket.getticket(token, TicketType.jsapi);
             Assert.AreEqual(0, result.errcode);
         }
     }
